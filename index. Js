@@ -1,0 +1,31 @@
+// index.js
+// Dark Heart Bot (WhatsApp + Telegram)
+
+const { spawn } = require("child_process");
+
+console.log("🚀 Starting Dark Heart Bot...");
+
+// Function to run a script
+function runScript(name, file) {
+  console.log(`✅ Launching ${name}...`);
+  const process = spawn("node", [file], {
+    stdio: "inherit",
+    shell: true
+  });
+
+  process.on("close", (code) => {
+    console.log(`❌ ${name} stopped with code ${code}`);
+  });
+
+  process.on("error", (err) => {
+    console.error(`⚠️ Error in ${name}:`, err);
+  });
+}
+
+// Run WhatsApp bot
+runScript("WhatsApp Bot", "bot.js");
+
+// Run Telegram Panel
+runScript("Telegram Panel", "panel.js");
+
+console.log("🌙 Dark Heart is running... Owner: Mehdi Hacker");
